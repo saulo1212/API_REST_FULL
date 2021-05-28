@@ -1,0 +1,16 @@
+{
+  "name": "API_REST_FULL",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/saulo1212/API_REST_FULL.git",
+  "author": "powermonitoramento <desenvolvimento@organizacoespower.com.br>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.3.2"
+  }
+}
