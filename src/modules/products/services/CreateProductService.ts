@@ -5,14 +5,14 @@ import { ProductsRepository } from "../typeorm/repositories/ProductsRepository";
 import Product from "../typeorm/entities/Product";
 
 interface IRequest {
-    name: string,
-    price: number,
+    name: string;
+    price: number;
     quantity: number
 }
 
 class CreateProductService {
 
-    async execute({name, price, quantity}: IRequest):Promisse<Product> {
+    async execute({name, price, quantity}: IRequest): Promise<Product> {
 
         const productRepository =  getCustomRepository(ProductsRepository)
 
