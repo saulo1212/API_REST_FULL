@@ -35,6 +35,7 @@ productsRouter.post('/', ValidateBody(), productsController.create);
 
 
 productsRouter.put('/:id', ValidateId(), ValidateBody(), productsController.updated);
+
 productsRouter.delete('/:id', ValidateId(), productsController.delete);
 
 export default productsRouter;
