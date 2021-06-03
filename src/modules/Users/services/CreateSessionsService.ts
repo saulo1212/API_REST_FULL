@@ -11,8 +11,6 @@ interface IRequest {
     password: string
 }
 
-
-
 export default class CreateSessionsService {
 
     async execute({ email, password}: IRequest): Promise<User> {
