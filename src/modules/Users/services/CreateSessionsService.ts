@@ -3,7 +3,8 @@ import AppError from "../../../shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
 import User from "../typeorm/entities/User";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
-import { compare, hash } from "bcryptjs";
+import { compare } from "bcryptjs";
+import { sign } from "jsonwebtoken";
 
 
 interface IRequest {
@@ -11,9 +12,14 @@ interface IRequest {
     password: string
 }
 
+interface IResponse {
+    user: User; 
+    token: string;
+}
+
 export default class CreateSessionsService {
 
-    async execute({ email, password}: IRequest): Promise<User> {
+    async execute({ email, password}: IRequest): Promise<IResponse> {
 
         const usersRepository = getCustomRepository(UsersRepository);
 
@@ -26,9 +32,17 @@ export default class CreateSessionsService {
 
         if(!passwordConfirmed)
             throw new AppError('Dados inalidos!', 401);
+
+        
+        const token = sign({}, '8a5da52ed126447d359e70c05721a8aa',{
+            subject:user.id,
+            expiresIn:'1d'
+        });
     
 
-        return user;
+        return {
+            user, token
+        };
 
     }
 
