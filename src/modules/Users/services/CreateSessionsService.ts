@@ -5,6 +5,7 @@ import User from "../typeorm/entities/User";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
+import authConfig from '../../../config/auth';
 
 
 interface IRequest {
@@ -34,9 +35,9 @@ export default class CreateSessionsService {
             throw new AppError('Dados inalidos!', 401);
 
         
-        const token = sign({}, '8a5da52ed126447d359e70c05721a8aa',{
+        const token = sign({}, authConfig.jwt.secret,{
             subject:user.id,
-            expiresIn:'1d'
+            expiresIn: authConfig.jwt.expiresIn
         });
     
 
