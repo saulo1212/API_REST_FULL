@@ -14,4 +14,6 @@
     "cli":{
         "migrationsDir":"./src/shared/typeorm/migrations"
     }
+
+    
  }
