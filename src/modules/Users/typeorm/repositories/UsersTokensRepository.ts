@@ -15,7 +15,7 @@ export default class UsersTokensRepository extends Repository<UserToken> {
     }
 
 
-    async generate(user_id:string):Promise<UserToken | undefined>{
+    async generate(user_id:string):Promise<UserToken>{
 
         const userToken = await this.create({user_id});
 
