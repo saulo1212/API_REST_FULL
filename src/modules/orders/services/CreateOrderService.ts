@@ -24,19 +24,12 @@ class CreateOrderService {
         const customerRepository = getCustomRepository(CustomersRepository);
         const productsRepository = getCustomRepository(ProductsRepository)
 
-        const productExists =  await productRepository.findByName(name);
+        const customerExits = await customerRepository.findById(customer_id);
 
-        if(productExists)
-            throw new AppError('There is already one product with this name');
+        if(!customerExits)
+            throw new AppError('could not find  any customer with');
 
-        const product = productRepository.create({
-            name, price, quantity
-        });
-
-        await productRepository.save(product);
-
-
-        return product;
+        const existsProducts = await productsRepository.findAllByIds(products);
 
     }
 
