@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import ShowOrderService from "../services/CreateOrderService";
-import CreateOrderService from "../services/ShowOrderService";
+import ShowOrderService from "../services/ShowOrderService";
+import CreateOrderService from "../services/CreateOrderService";
 
 
 export default class OrdersController {
@@ -9,7 +9,7 @@ export default class OrdersController {
 
         const {id} = request.params;
 
-        const showOrder = new ShowOrderService;
+        const showOrder = new ShowOrderService();
 
         const order =  await showOrder.execute({id});
 
@@ -20,7 +20,7 @@ export default class OrdersController {
 
         const {customer_id, products} = request.body;
 
-        const createOrder = new CreateOrderService;
+        const createOrder = new CreateOrderService();
 
         const order  = await createOrder.execute({
             customer_id, products
