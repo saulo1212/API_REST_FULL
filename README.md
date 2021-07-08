@@ -42,3 +42,5 @@ Após essa instalação execute a aplicação com o comando `yarn dev` ou `npm r
 
 
 [Linkedin](https://www.linkedin.com/in/saulo-moreira-151951120/)
+
+docker run --name redis-client  -v redisinsight:/db -p 8001:8001 -d -t redislabs/redisinsight:latest
