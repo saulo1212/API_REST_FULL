@@ -9,12 +9,15 @@ import  cors from 'cors';
 import routes from './routes';
 import AppError from '../errors/AppError';
 import uploadConfig from '../../config/upload';
+import rateLimiter from '../http/middlewares/rateLimiter';
 
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use(rateLimiter);
 
 app.use(pagination);
 
