@@ -3,9 +3,7 @@ import AppError from "../../../shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
 import User from "../typeorm/entities/User";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
-import path from 'path';
-import uploadConfig from '../../../config/upload';
-import fs from 'fs';
+import  DiskStorageProvider from '../../../shared/providers/StorageProvider/DiskStorageProvider';
 
 
 interface IRequest {
@@ -18,6 +16,7 @@ class UpdateUserAvatarService {
     async execute({user_id, avatarFileName}: IRequest): Promise<User> {
 
         const usersRepository = getCustomRepository(UsersRepository);
+        const storageprovider =  new DiskStorageProvider();
 
         const user = await usersRepository.findById(user_id);
 
@@ -25,17 +24,14 @@ class UpdateUserAvatarService {
             throw new AppError('User not found!');
 
         if(user.avatar){
-            const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
-
-            const userAvatarFileExists =  await fs.promises.stat(userAvatarFilePath);
-
-            if(userAvatarFileExists)
-                await fs.promises.unlink(userAvatarFilePath);
             
+            await storageprovider.deleteFile(user.avatar);
         }
 
+        const fileName =  await storageprovider.saveFile(avatarFileName);
 
-        user.avatar = avatarFileName;
+
+        user.avatar = fileName;
 
 
         await usersRepository.save(user);
