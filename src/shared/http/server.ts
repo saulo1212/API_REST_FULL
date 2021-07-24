@@ -28,7 +28,7 @@ app.use(routes);
 
 app.use(errors());
 
-app.use((error: Error, request:Request, response:Response, next: NextFunction) => {
+/*app.use((error: Error, request:Request, response:Response, next: NextFunction) => {
 
     if(error instanceof AppError){
 
@@ -42,7 +42,7 @@ app.use((error: Error, request:Request, response:Response, next: NextFunction) =
         status: 'error',
         message: 'Internal server error'
     });
-});
+});*/
 
 app.listen(3335, () => {
     console.log('server starterd on port 3333!')
