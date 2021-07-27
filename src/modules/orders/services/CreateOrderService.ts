@@ -1,9 +1,9 @@
 import AppError from "../../../shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
-import Order from '../typeorm/entities/Orders';
-import OrdersRepository from "../typeorm/repositories/OrdersRepository";
+import Order from '../infra/typeorm/entities/Orders';
+import OrdersRepository from "../infra/typeorm/repositories/OrdersRepository";
 import CustomersRepository from "../../customers/infra/typeorm/repositories/CustomersRepository";
-import { ProductsRepository } from "../../products/typeorm/repositories/ProductsRepository";
+import { ProductsRepository } from "../../products/infra/typeorm/repositories/ProductsRepository";
 
 
 interface IProduct {
@@ -58,7 +58,7 @@ class CreateOrderService {
             product_id: product.id,
             quantity: product.quantity,
             price: existsProducts.filter(p => p.id === product.id)[0].price
-        }));
+        }));s
 
 
         const order =  await ordersRepository.createOrder({

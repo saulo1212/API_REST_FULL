@@ -1,6 +1,6 @@
 
 import { getCustomRepository } from "typeorm";
-import { ProductsRepository } from "../typeorm/repositories/ProductsRepository";
+import { ProductsRepository } from "../infra/typeorm/repositories/ProductsRepository";
 import AppError from "../../../shared/errors/AppError";
 import redisCache from "../../../shared/cache/RedisCache";
 

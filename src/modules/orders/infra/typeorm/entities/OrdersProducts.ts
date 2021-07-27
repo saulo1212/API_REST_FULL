@@ -1,6 +1,6 @@
 import Order from './Orders';
 import { CreateDateColumn, Entity, JoinColumn, ManyToOne, Column, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import Product from '../../../products/typeorm/entities/Product';
+import Product from '../../../../products/infra/typeorm/entities/Product';
 
 @Entity('orders_products')
 export default class OrdersProducts {

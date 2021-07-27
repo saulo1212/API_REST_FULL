@@ -2,9 +2,9 @@ import {Router} from 'express';
 
 import {celebrate, Joi, Segments} from 'celebrate';
 import UsersController from '../controllers/UsersController';
-import isAuthenticated from '../../../shared/Infra/http/middlewares/isAuthenticated';
+import isAuthenticated from '../../../../../shared/Infra/http/middlewares/isAuthenticated';
 import multer from 'multer';
-import uploadConfig from '../../../config/upload';
+import uploadConfig from '../../../../../config/upload';
 import UserAvatarController from '../controllers/UserAvatarController';
 
 const usersRouter = Router();
