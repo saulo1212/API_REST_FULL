@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 import CreateCustomerService from "../../../services/CreateCustomerService";
 import DeleteCustomerService from "../../../services/DeleteCustomerService";
 import ListCustomerService from "../../../services/ListCustomerService";
@@ -31,7 +32,7 @@ export default class CustomersController {
 
         const {name,email} = request.body;
 
-        const createCustomer = new CreateCustomerService();
+        const createCustomer = container.resolve(CreateCustomerService);
 
         const customer  = await createCustomer.execute({
             name, email

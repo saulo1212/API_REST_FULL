@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import 'dotenv/config';
 import '../typeorm';
+import '../../container';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import {errors} from 'celebrate';

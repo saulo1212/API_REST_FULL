@@ -1,13 +1,37 @@
-import { EntityRepository, Repository } from "typeorm";
+import { ICustomersRepository } from "../../../domain/repositories/ICustomersRepository";
+import { getRepository, Repository } from "typeorm";
 import Customers from "../entities/Customers";
+import { ICreateCustomer } from "../../../domain/models/ICreateCustomer";
 
 
-@EntityRepository(Customers)
-export default class CustomersRepository extends Repository<Customers> {
+export default class CustomersRepository  implements ICustomersRepository {
 
-    async findByName(name:string):Promise<Customers | undefined>{
+    private ormRepository: Repository<Customers>;
 
-        const customer = await this.findOne({
+    constructor(){
+        this.ormRepository = getRepository(Customers);
+    }
+
+    public async create({name, email}: ICreateCustomer): Promise<Customers>{
+
+        const customer = this.ormRepository.create({name,email});
+
+        await this.ormRepository.save(customer);
+
+        return customer;
+    }
+
+    public async save(customer:Customers): Promise<Customers>{
+        
+        await this.ormRepository.save(customer);
+
+
+        return customer;
+    }
+
+    public async findByName(name:string):Promise<Customers | undefined>{
+
+        const customer = await this.ormRepository.findOne({
             where:{name}
         });
 
@@ -15,9 +39,9 @@ export default class CustomersRepository extends Repository<Customers> {
     }
 
 
-    async findById(id:string):Promise<Customers | undefined>{
+    public async findById(id:string):Promise<Customers | undefined>{
 
-        const customer = await this.findOne({
+        const customer = await this.ormRepository.findOne({
             where:{id}
         });
 
@@ -25,9 +49,9 @@ export default class CustomersRepository extends Repository<Customers> {
     }
 
 
-    async findByEmail(email:string):Promise<Customers | undefined>{
+    public async findByEmail(email:string):Promise<Customers | undefined>{
 
-        const customer = await this.findOne({
+        const customer = await this.ormRepository.findOne({
             where:{email}
         });
 
