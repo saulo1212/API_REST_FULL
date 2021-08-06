@@ -22,7 +22,11 @@ export default class FakeCustomersRepository  implements Omit<ICustomersReposito
 
     public async save(customer: Customers): Promise<Customers>{
 
-        Object.assign(this.customers, customer);
+        const findIndex = this.customers.findIndex(
+            findCustomer => findCustomer.id === customer.id
+        )
+
+        this.customers[findIndex] = customer;
 
         return customer;
     }
